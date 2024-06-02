@@ -1,0 +1,33 @@
+Similar to the exercises done in the lecture,
+obtain a resultset containing the employee number,
+first name,
+and last name of all employees with a number higher than 109990.Create a fourth column in the query,
+indicating whether this employee is also a manager,
+according to the data provided in the dept_manager table,
+or a regular employee.
+SELECT e.emp_no,
+    e.first_name,
+    e.last_name,
+    CASE
+        WHEN dm.emp_no IS NOT NULL THEN 'Manager'
+        ELSE 'Employee'
+    END AS is_manager
+FROM employees e
+    LEFT JOIN dept_manager dm ON dm.emp_no = e.emp_no
+WHERE e.emp_no > 109990;
+
+
+THE SQL CASE
+    Statement - Exercise 3 Extract 
+    the employee number,first name, and last name of the first 
+    10 employees,and add a fourth column, called “ current_employee 
+    ” saying recently hire or long timer in the company, 5th column
+    will use IF statement to say full form on the gender.
+
+SELECT first_name, last_name,
+CASE
+when hire_date > SYSDATE() then 'New Workers'
+else 'Experience Workers' 
+end as current_employee,
+if (gender = 'F', 'Female', 'Male')
+from employees e 
